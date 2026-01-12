@@ -1,0 +1,657 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage[newfloat]{minted}
+\usemintedstyle{vs}   
+\setminted{
+  fontsize=\small,
+  breaklines,
+  autogobble,
+  frame=lines,
+  framesep=3mm,
+  bgcolor=black!5
+}
+
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{siunitx}
+\usepackage{caption}
+\captionsetup{labelfont=bf}
+
+\sisetup{
+  table-number-alignment = center,
+  table-text-alignment  = center,
+  detect-weight,
+  mode = text
+}
+
+% For letter subscripts on means: \msub{688}{a} -> 688ₐ
+\newcommand{\msub}[2]{\ensuremath{#1_{\mathrm{#2}}}}
+
+\title{Analysis of Racial Distribution of Mathematics Classes in  Cambridge Rindge and Latin School}
+\author{Calder Russell}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Public education is both a fundamental right and a key mechanism through which societies expand opportunity and reduce inequity. International human-rights frameworks explicitly frame education as a basic right with implications for social and economic inclusion. \href{https://www.unesco.org/en/right-education}{UNESCO}
+Yet “access” is not only about whether students can attend school. It  includes access to the specific academic experiences e.g. rigorous courses, skilled instruction, advising, and institutional encouragement. These experiences help shape college readiness and long-term outcomes.
+
+Within U.S. secondary schools, one of the most consequential forms of unequal access occurs through differences in course placement. Decades of research on tracking and ability grouping show that schools can reproduce inequality internally by organizing students into different curricular pathways that vary in rigor, expectations, and instructional opportunity; these systems have often disproportionately placed students of color into lower tracks and away from advanced coursework. \href{https://eric.ed.gov/?id=ED274749}{Eric citation}This matters because high school course sequences strongly structure later options. In mathematics in particular, algebra functions as a “gateway” to subsequent coursework: students need algebra to reach higher-level math in high school, and national evidence links completion of Algebra II with college success and later earnings. \href{https://eric.ed.gov/?id=ED274749}{Eric citation}
+Advanced courses such as AP are also associated with post secondary outcomes, including higher rates of college enrollment and completion. \href{https://apcentral.collegeboard.org/media/pdf/ap-students-in-college.pdf}{AP central}
+ When access to advanced coursework is patterned by race, it raises a dual concern: (1) whether schools are equitably allocating academic opportunity, and (2) whether the institution is unintentionally creating cumulative advantage---where early placement differences compound into widening gaps over time.
+
+This thesis examines racial disparities in course enrollment at Cambridge Rindge and Latin School (CRLS), with a primary focus on advanced mathematics, and with comparative evidence from other subjects and from student-reported experiences. CRLS is a large, diverse comprehensive high school in Cambridge, Massachusetts, and has experienced repeated public debate over how to balance equity, rigor, and placement policy---especially around math sequencing and the role of “accelerated” pathways. Recent local reforms (and controversy) have centered on when algebra should be taught, how students should be grouped, and whether policy shifts create genuine access or simply displace gatekeeping into less visible forms that the school system does not have any control over (e.g., private tutoring, external enrichment).
+
+The motivating premise of this study is straightforward: if advanced coursework functions as a gateway to later opportunity, then persistent racial disparities in enrollment are an institutional indicator of inequities. This thesis is designed to document any disparities, and take an evidence approach to explain likely mechanisms.
+
+The study asks:
+\begin{itemize}
+    \item Representation: Do observed racial distributions in advanced mathematics courses at CRLS differ from what would be expected based on overall school demographics? The null hypothesis used while conducting analysis is as follows:
+    The proportions of students enrolled in math classes should be the same as the proportions of students enrolled in the school at large [Table 2, Appendix E.1]. Additionally to reject our null hypothesis we will use an $\alpha$ level of 0.001. This value was chosen as a value that would be \textit{very} unlikely to occur by happenstance therefore proving the existance of inequities. 
+    \item Magnitude: If differences exist, how large are they (not just whether they are statistically significant)?
+    \item Comparison across subjects: Are similar patterns visible in other course areas (e.g., English and History), and if the administrative data are suppressed, what can be responsibly inferred?
+    \item Student experience and interpretation: How do students describe course access, encouragement, and barriers---and how do these perceptions align with, complicate, or challenge the administrative patterns?
+\end{itemize}
+
+This project provides a transparent quantitative description of enrollment disparities in advanced mathematics at CRLS, using both significance testing and effect-size estimation.
+Additionally, it incorporates student perspectives to illuminate plausible barriers and to ground recommendations in the realities of course selection and participation.
+
+
+\section{Literature Review}
+
+This thesis treats course enrollment as an institutional indicator of academic opportunity. Prior research on tracking, curriculum differentiation, and advanced-course participation shows that schools can reproduce inequality \emph{within} a single building by sorting students into pathways that differ in rigor, expectations, instructional resources, and access to later options. Because mathematics is both highly sequenced and strongly credentialed, disparities in math course-taking are especially consequential: early placement can determine whether students reach higher-level coursework later in high school, including advanced and college-linked courses. Building on this literature, the sections below synthesize (1) why CRLS is a theoretically important local case, (2) what research establishes about tracking and detracking---especially in mathematics, (3) the mechanisms that commonly produce racial disparities in advanced-course enrollment, and (4) why expanding access alone does not guarantee equitable outcomes.
+
+\subsection{CRLS and Cambridge as a reform-active context}
+Cambridge has a long history of internal differentiation in secondary schooling, including distinct academic and technical traditions and (later) multiple pathways operating within one comprehensive high school. Historical accounts of CRLS describe how institutional structures---including separate program identities and internal divisions---can shape how students experience opportunity and belonging over time \citep{LangoneCRLSHistory}. This history matters for the present study because contemporary course placement debates at CRLS occur in a context where the school system has repeatedly attempted structural reforms, and where families and community politics are active in shaping educational policy. In other words, CRLS is not only a site where disparities may be measured; it is also a site where reform efforts are recurrent and contested, making it a useful case for examining how opportunity structures persist or shift under policy change.
+
+\subsection{Tracking as an organizational system, and why mathematics is structurally different}
+A central finding in the tracking literature is that ability grouping is not a neutral reflection of student skill; it is an organizational practice that can magnify inequality by assigning students to different curricular experiences with unequal instructional opportunity. Tracking often predicts differences in access to advanced content, teacher expectations, peer environments, and subsequent course sequences \citep{Oakes2005, Kelly2009}. Although detracking reforms have expanded in many contexts, research suggests that mathematics remains uniquely resistant to full detracking because of its sequential structure and because algebra frequently operates as a gatekeeper to higher coursework.
+
+Evidence from Massachusetts illustrates this pattern. In statewide analyses of middle-school course structures, tracking declined across many subjects over time, yet math retained multi-level systems more persistently than English, history, or science \citep{Loveless2013}. This persistence is often justified as a response to wide skill variation; however, the literature also emphasizes that local governance and political pressures frequently shape whether tracking remains in place, not solely pedagogical necessity \citep{Loveless2013}. For this thesis, the implication is that disparities in CRLS mathematics course-taking should be interpreted not only as individual-level outcomes, but also as products of organizational decisions about sequencing, placement, and what counts as being ``ready'' for advanced study.
+
+\subsection{Mechanisms producing unequal access inside the same school}
+Even in schools that are racially diverse or nominally comprehensive, the literature identifies several mechanisms that repeatedly generate racial disparities in advanced-course participation. Three mechanisms are especially relevant for this study: (1) early gatekeeping and pipeline filters, (2) information asymmetry and social capital in course selection, and (3) racialized expectations and beliefs about mathematical ability.
+
+\paragraph{Gatekeeping and early filters in the math pipeline.}
+A consistent empirical result is that disparities emerge early, often at the point of initial placement into algebra or other advanced middle-school math courses. Studies of eighth-grade Algebra I placement show that Black and Hispanic students are frequently underrepresented even when prior achievement is accounted for, suggesting that ``readiness'' determinations and institutional gatekeeping contribute to unequal access \citep{MortonRiegleCrumb2019}. Because mathematics is sequential, early gatekeeping is not merely temporary; it can constrain the set of feasible later courses, shaping whether students ever reach advanced high-school math. In this way, course placement operates as a cumulative process: modest differences in early placement can compound into large disparities several years later.
+
+\paragraph{Information, advising, and social capital.}
+Course placement is also shaped by informational resources and the availability of guidance at key decision points. Using longitudinal data, \citet{CrosnoeSchneider2010} show that socioeconomic status predicts both initial placement and persistence in math coursework even after controlling for prior achievement. Importantly, access to ``coursework consultants'' (teachers, counselors, and parents) partially explains these gaps, indicating that students with more informational support can navigate course sequences more effectively \citep{CrosnoeSchneider2010}. This line of work reframes course-taking disparities as partly institutional: when course pathways are complex and decisions occur at discrete transition points, differences in advising and insider knowledge can function as a sorting mechanism.
+
+\paragraph{Expectations, race, and the meaning of mathematical ability.}
+A third mechanism concerns how mathematics is culturally positioned as a signal of intelligence and how race can shape expectations about who belongs in advanced math. \citet{LadsonBillings1997} argues that mathematics is often treated as a culture-free domain, obscuring how race and culture shape access to high-quality instruction, teacher expectations, and opportunity. In this view, opportunity gaps are not reducible to student deficits; they arise from structural sorting and from instructional environments that reflect unequal expectations. Related empirical work shows that even within the same schools, Black students can experience persistent disadvantages in math course-taking patterns relative to White peers, including reduced access to advanced sequences \citep{Kelly2009}. Together, these accounts suggest that racial disparities in advanced-course enrollment should be interpreted as institutional signals that merit explanation, not as straightforward reflections of ability.
+
+\subsection{Reform evidence: detracking can work, but only with instructional supports}
+The literature on detracking provides two crucial cautions that matter for interpreting CRLS patterns and for framing recommendations. First, structural reforms that change placement are not sufficient on their own; second, when detracking is paired with serious instructional supports, outcomes can improve without harming higher-achieving students.
+
+Experimental and quasi-experimental evidence from instructionally supported detracking reforms shows that placing students into more rigorous coursework can yield achievement gains when teacher support, professional development, and classroom strategies are designed for heterogeneous skill levels \citep{DeeHuffakerAlgebraInitiative}. In such reforms, the key intervention is not simply removing a lower track; it is coupling high expectations with the capacity to teach mixed-ability classrooms effectively. This finding is particularly relevant to mathematics, where wide skill variation is frequently used to justify tracking. The research suggests that the practical feasibility of equity-oriented reform depends on whether the institution invests in the instructional infrastructure needed to support broader participation.
+
+\subsection{Access versus equity: advanced-course expansion can widen inequality}
+A final theme in the literature is that expanding the availability of advanced courses does not automatically reduce inequality. Research on Advanced Placement expansion shows that when new advanced options are added, the primary beneficiaries are often already-advantaged students, and disparities can widen without targeted encouragement and support for underrepresented groups \citep{Owen2025AP}. The implication is that equity-focused policy cannot rely on availability alone. If barriers include information asymmetry, discouragement, or differential advising, then increasing supply may leave underlying sorting mechanisms intact.
+
+\subsection{Synthesis: what this thesis contributes}
+Taken together, prior research suggests that racial disparities in advanced mathematics enrollment are likely to reflect a combination of pipeline gatekeeping, differences in access to advising and informational resources, and unequal expectations about who belongs in advanced math. The literature also suggests that meaningful reductions in disparity require attention to both structure (placement policies and course sequences) and instruction (supports that make heterogeneous rigor feasible). This thesis contributes by documenting enrollment patterns at CRLS, estimating the magnitude of disparities, and using student-reported experience as an interpretive layer to evaluate which mechanisms appear most plausible in this local context.
+
+
+\section{Data}
+The data for this thesis comes in 2 major parts:
+
+\subsection{Math enrollment}
+The data on math enrollment collected for this project was gather by the Cambridge Public Schools and organized by the Cambridge “Data Team”. The data consisted of 5 years of enrollment figures from 2020 to 2024. The number of students from each racial category (Black, White, Asian, Hispanic, Native Hawaiian, Native American, and Multi-race Non-Hispanic) and Gender (Male, Female, and NB) were reported for every math class each year. Much of the data had to be suppressed to keep individual students anonymous; every value of 5 and under had to be suppressed. To approximate the number of students in these categories. This meant for my analysis I stuck to mainstream classes that had consistently higher overall enrollment. 
+\subsection{Survey}
+To supplement the enrollment analysis, a student-designed equity survey was
+created with the intention to understand student perspectives on course access. While some quantitative summaries are reported, these results are exploratory due to the survey’s non-random sample.
+This survey was conducted over the course of two and a half weeks, students were reached out to over email and approached in person during lunch periods to be asked to partake in the survey. Ultimately 452 total responses were accrued this is equivalent to $~22\%$ of the student population at CRLS.
+This survey consisted of many Likert-scale questions meant to gain a better understanding of how students view equity in CRLS and whether students believe there are any issues present and if so why those issues exist.
+There were additional optional open response questions meant to gauge what students thought needed to be fixed with the school's current approach to equity. 
+
+\section{Results and Discussion}
+\subsection{Statistical Analysis Results}
+
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Significance and Effect Size in Each Class Level and Overall}
+\label{tab:rt-errors}
+\small
+\begin{tabular}{l S S S S}
+\toprule
+Class Level & {Standard} & {Honors} & {Advanced Placement} & {Overall} \\
+\midrule
+p-value     & 4.254e-27 & 8.176e-134 & 6.108e-49 & 0 \\
+Cohen's \(w\) & 0.5484 & 0.2369 & 0.4866 & 0.3740 \\
+\bottomrule
+\end{tabular}
+
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Note.} The reason the overall p-value is not represented in scientific notation and is instead 0 is because \\
+($p_{overall} < \num{1e-200}$) and therefore could not be calculated with any more certainty.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+
+%this figure is just a combination of the 3 figures below
+%\subsection{Analysis of Racial Composition}
+%\begin{figure}[h]
+    %\centering
+    %\includegraphics[width=1.25
+   % \linewidth]{math_enrollment_chart.png}
+  %  \caption{Enter Caption}
+ %   \label{fig:placeholder}
+%\end{figure}
+
+The axes in the following figures do not have a cap of the population of the school because a single student may enroll in many different classes of the same level.
+
+\begin{figure}[htbp]% fix positioning
+    \centering
+    \includegraphics[width=1\linewidth]{Standard_Race.png}
+    \caption{Expected vs Observed values: Standard Classes}
+    \label{fig:placeholder}
+\end{figure}
+
+Figure 1 shows observed and expected enrollment counts for standard-level mathematics courses by race. Black and Hispanic students have higher observed counts than expected based on school demographics, while White and Asian students have lower observed counts than expected.
+
+\begin{figure}[htbp] % fix positioning
+    \centering
+    \includegraphics[width=1\linewidth]{AP_Race.png}
+    \caption{Expected vs Observed values: AP Classes}
+    \label{fig:placeholder}
+\end{figure}
+
+Figure 2 presents observed and expected enrollment counts for honors-level mathematics courses by race. Observed counts are closer to expected values than in other course levels, though White and Asian students remain slightly overrepresented and Black students slightly underrepresented.
+
+\begin{figure}[htbp] % fix positioning
+    \centering
+    \includegraphics[width=1\linewidth]{Hn_Race.png}
+    \caption{Expected vs Observed values: Honors Classes}
+\end{figure}
+
+Figure 3 compares observed and expected enrollment counts for Advanced Placement mathematics courses by race. White and Asian students have observed counts substantially above expected values, while Black and Hispanic students have observed counts substantially below expected values.
+
+
+
+This section presents the empirical findings on racial disparities in course enrollment at Cambridge Rindge and Latin School (CRLS). The analysis proceeds in five stages. First, it evaluates whether observed enrollment distributions in mathematics differ from what would be expected based on overall school demographics. Second, it assesses the magnitude of these differences using effect-size measures. Third, it examines how disparities vary across levels of course rigor. Fourth, it evaluates whether observed patterns persist over time. Finally, it situates mathematics enrollment within a broader academic context by examining comparative evidence from other subject areas.
+
+\subsubsection{Figure analysis}
+Figures 1–3 compare observed enrollment counts in mathematics courses at Cambridge Rindge and Latin School to expected counts based on overall school demographics, revealing systematic departures from proportional representation across course levels. In standard-level mathematics, Black and Hispanic students are overrepresented relative to their expected counts, while White students are notably underrepresented and Asian students slightly underrepresented. At the opposite end of the course hierarchy, Advanced Placement (AP) mathematics shows the largest divergence from expected counts in the reverse direction: White and Asian students are substantially overrepresented, and Black and Hispanic students are sharply underrepresented. Honors-level mathematics lies between these extremes, with observed enrollments more closely aligned to expected values, though White and Asian students remain modestly overrepresented and Black students modestly underrepresented.
+
+Taken together, these patterns suggest that racial disproportionality in mathematics enrollment at CRLS is not simply a matter of exclusion from the highest levels, but also of differential assignment away from the lowest level. The underrepresentation of White students in standard-level mathematics is as analytically significant as the underrepresentation of Black and Hispanic students in AP courses, indicating that the placement system functions through sorting at both ends of the course hierarchy. Rather than a single directional gradient, the figures point to a dual structure in which standard-level courses disproportionately enroll students of color, honors courses are comparatively closer to demographic balance, and AP courses disproportionately enroll White and Asian students. This distribution raises questions about how placement decisions, expectations, and pathways interact to produce concentration at the extremes, setting the stage for further analysis of persistence over time and student-reported experiences.
+
+\subsubsection{Chi-Squared Analysis}
+Null Hypothesis:\\
+The proportions of the races of students enrolled in math classes should be the same as proportions of the races of students in the school at large [Table 2, Appendix E.1]. \\
+Alternate Hypothesis:\\
+The proportions of the races of students in math classes differ significantly from the school's total. 
+\\
+Across all years examined, observed racial distributions in mathematics course enrollment differ significantly from expected distributions based on overall CRLS demographics. Chi-square goodness-of-fit tests consistently reject the null hypothesis of proportional representation, indicating that course placement is not racially neutral.
+
+These disparities are not confined to a single cohort or anomalous year. Rather, they appear systematically across multiple academic years, suggesting that they reflect persistent institutional patterns rather than short-term fluctuations. Importantly, these results establish that disparities exist, but not yet where or how they are most pronounced within the mathematics course hierarchy.
+
+\subsubsection{Effect size comparison}
+
+To evaluate the substantive importance of these deviations, Cohen’s w was calculated for each year and course grouping. Across years, effect sizes consistently fall within the small-to-moderate range, with several years approaching thresholds typically interpreted as educationally meaningful.
+
+This finding is critical. Statistical significance alone could be driven by large sample sizes; however, the magnitude of the observed deviations indicates that disparities are not merely detectable but substantively consequential. In practical terms, these effect sizes correspond to meaningful differences in the likelihood that students from different racial groups are enrolled in particular levels of mathematics coursework.
+
+\subsubsection{Comparison in course level departure severity}
+When mathematics courses are disaggregated by level, disparities do not follow a simple monotonic gradient with course rigor. Instead, effect size estimates reveal a bifurcated pattern. Cohen’s w values are largest for standard-level mathematics, smaller for Advanced Placement (AP) courses, and smallest for honors-level courses.
+
+This pattern indicates that racial disproportionality is most severe at the lower end of the mathematics course hierarchy, where Black and Hispanic students are substantially overrepresented relative to school demographics. Honors-level mathematics shows the closest alignment with proportional representation, suggesting that this level functions as a relative equilibrium point within the placement system. Advanced Placement mathematics, while still exhibiting meaningful underrepresentation of Black and Hispanic students, displays a smaller overall effect size than standard-level courses.
+
+Taken together, these results suggest that inequity in mathematics placement at CRLS is characterized not by a linear increase in disparity with course rigor, but by a sorting process that concentrates students of color disproportionately into standard-level courses while limiting—but not eliminating—their presence at the highest levels. This bifurcated structure points to institutional placement mechanisms that operate at both ends of the course hierarchy, rather than exclusively through elite exclusion.
+
+\section{Results of the Survey}
+This section synthesizes results from the CRLS Student Equity and Course Experience Survey, focusing on patterns across related questions rather than isolated response distributions. The survey is treated as exploratory and interpretive evidence, intended to contextualize administrative enrollment patterns by capturing how students perceive course placement, encouragement, and equity at CRLS. Because the survey sample is not demographically representative of the school as a whole, results are not interpreted as population estimates, but as insight into how students understand and experience the course placement system.
+
+\subsection{Respondents Breakdown}
+Figure [Appendix D.2] displays the racial and ethnic composition of students who responded to the survey. White students make up the largest proportion of respondents, accounting for approximately 40.7\% of the sample. Asian students represent 17.5\% of respondents, while students identifying as Multi-Race Non-Hispanic (MRNH) comprise 15.7\%. Black or African American students account for 14.4\% of survey respondents, and Hispanic students make up 11.5\% of the sample. Pacific Islander students are minimally represented, comprising approximately 0.2\% of respondents.
+\subsection{Perceptions of Equity and Fairness in Course Placement}
+
+Across multiple questions, student responses indicate a mixed and often ambivalent assessment of equity in course placement. When asked whether students are fairly placed into different course levels, a plurality of respondents agreed, but a large neutral group and a substantial minority expressing disagreement suggest that perceptions of fairness are far from universal. This pattern recurs across several equity-related items, where agreement and disagreement coexist alongside unusually high neutral response rates.
+
+This clustering of responses suggests that many students do not experience course placement as clearly equitable or inequitable, but rather as opaque or context-dependent. The prominence of neutral responses may reflect limited visibility into how placement decisions are made, uncertainty about whether observed disparities are intentional or structural, or variation in experiences across departments and individual pathways.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{image.png}
+    \caption{Breakdown of the Race of respondents who believe in inequities}
+    \label{fig:placeholder}
+\end{figure}
+This figure shows that Asian and Hispanic students are less likely to believe that inequities exist in CRLS. 
+\subsection{Discouragement, Underestimation, and Academic Support}
+
+A second group of questions addresses whether students have felt discouraged from enrolling in higher-level courses or underestimated by teachers or counselors. Across these items, a consistent minority--approximately one-quarter to one-third of respondents--report having experienced discouragement or underestimation, while roughly half report that they have not.
+
+Importantly, these findings coexist with a strong majority of students reporting that they have felt supported or uplifted by at least one teacher or counselor. Taken together, these responses suggest that individual experiences of encouragement and support can coexist with broader perceptions of structural limitation. That is, students may feel personally supported while still perceiving that access to advanced coursework is uneven or contingent on factors beyond individual effort.
+
+\subsection{Departmental Variation in Perceived Equity}
+
+When asked to identify the most and least equitable departments in terms of course placement, student responses show a striking concentration around mathematics. A majority of respondents selected math as the least equitable department, far exceeding any other subject area. In contrast, no single department dominated responses for most equitable placement, with answers distributed across arts, English, world languages, and math.
+
+This asymmetry suggests that mathematics occupies a distinctive role in students’ perceptions of academic equity at CRLS. While students may experience inequities in multiple domains, math appears to be uniquely associated with perceptions of stratification, gatekeeping, or unequal access. This finding aligns with the administrative data showing pronounced disparities in mathematics enrollment across course levels, and reinforces the interpretation of math as a key site of institutional sorting.
+
+\subsection{Attributions for Achievement Gaps}
+
+Questions addressing the causes of achievement gaps reveal a dominant preference for multifactor explanations. More than half of respondents attribute achievement gaps to a combination of in-school and out-of-school factors, while relatively few identify schools alone as the primary cause. This pattern is consistent across items addressing race, socioeconomic status, and broader inequities.
+
+At the same time, when students are asked what changes would be most effective in reducing inequities, they frequently identify school-controlled interventions, such as expanding academic support, improving curriculum and instruction, and increasing communication with families. This contrast suggests that students recognize the role of external structural inequality, yet still view schools as capable of meaningfully shaping academic opportunity through concrete, internal actions.
+
+\subsection{Perceptions of Institutional Action and Progress}
+
+Responses regarding whether CRLS is taking concrete steps to improve representation in advanced courses are characterized by uncertainty. A majority of students select “maybe” or “not sure,” with relatively few expressing clear confidence that such efforts are either successful or absent.
+
+This pattern of uncertainty may reflect the complexity and gradual nature of institutional reform, limited communication about ongoing initiatives, or uneven implementation across departments. Rather than indicating indifference, the responses suggest that many students are aware of equity-related efforts but unsure of their scope, effectiveness, or impact.
+
+\subsection{Themes from Open-Ended Responses}
+
+Analysis of open-ended responses reinforces and elaborates on patterns observed in closed-ended items. When asked to identify the biggest barriers to educational equity, students most frequently cite socioeconomic resources, followed by course placement structures and prerequisite systems. Teacher expectations and access to academic support also emerge as recurring themes.
+
+When prompted to suggest changes CRLS should make, students shift toward proposals that fall within the school’s direct control, including adjustments to course placement practices, expanded academic support, and clearer advising and communication. This shift mirrors the pattern observed in closed-ended responses, where students acknowledge external inequality but prioritize institutional levers when discussing solutions.
+
+Across open-ended responses, the dominant tone is pragmatic. Students rarely frame inequity in terms of individual blame; instead, they emphasize systems, structures, and access to information. Notably, many responses reflect an awareness that opportunity is shaped not only by formal policy, but by how pathways are explained, supported, and navigated.
+
+\subsection{Summary of Survey Findings}
+
+Taken as a whole, the survey results suggest that students perceive equity at CRLS as uneven, complex, and highly dependent on course structure and access to support. Mathematics stands out as the domain most strongly associated with perceived inequity, while individual relationships with teachers and counselors are often experienced as supportive even amid broader structural concerns. These patterns align with the administrative findings of stratified mathematics enrollment and provide context for understanding how institutional placement systems are experienced by students.
+
+
+
+\section{Policy Implications and Evidence-Based Recommendations}
+
+This section bridges the empirical analysis of course enrollment disparities at Cambridge Rindge and Latin School (CRLS) to actionable, evidence-based recommendations. Rather than proposing a single intervention, the literature and CRLS’s own experience suggest that durable equity gains require coordinated reforms across multiple levels of the educational system. Accordingly, this section distinguishes among \textit{structural}, \textit{instructional}, and \textit{informational} reforms, and evaluates how past initiatives at CRLS align with or diverge from best practices identified in prior research.
+
+\subsection{Historical Reforms at CRLS and Their Limited Impact}
+
+Over the past decade, Cambridge Public Schools has undertaken several reforms intended to reduce racial disparities in access to advanced coursework. While these initiatives were grounded in equity-oriented goals, their outcomes have been mixed, offering important lessons for future policy design.
+
+\subsubsection{Middle School Algebra De-Leveling}
+
+In 2017, Cambridge eliminated universal access to eighth-grade Algebra~I, replacing it with a common grade-level math curriculum in an effort to delay tracking and reduce racial stratification in middle school mathematics \citep{boston_globe_algebra_tracking, wgbh_algebra_cambridge}. This policy reflected research cautioning against early tracking, which has been shown to reproduce racial and socioeconomic inequities \citep{oakes1985keeping}.
+
+However, the reform was only partially implemented. While accelerated Algebra~I was removed, algebraic content was not consistently incorporated into the eighth-grade curriculum as originally intended, due in part to sequencing challenges and disruptions from the COVID-19 pandemic \citep{wgbh_algebra_cambridge,boston_globe_algebra_return}. As a result, many students entered ninth grade without exposure to formal algebra, while students with greater access to external resources—such as private tutoring, enrichment programs, or summer courses—were able to compensate outside of school \citep{boston_globe_russian_math,boston_globe_hidden_tracking}.
+
+
+City leaders and parents publicly criticized the policy as ``leveling down'' and limiting opportunity for advanced students \citep{wgbh_algebra_cambridge}. In response, Cambridge has since announced plans to phase Algebra~I back into eighth grade for all students by 2025 \citep{wgbh_algebra_return,boston_globe_algebra_return}.
+
+This episode underscores a key lesson from the detracking literature: delaying tracking without universally providing access to advanced curriculum content risks reducing opportunity for the very students reforms aim to support.
+
+\subsubsection{Bridge to Algebra Program}
+
+To mitigate the removal of eighth-grade Algebra~I, Cambridge introduced the Bridge to Algebra program, an optional after-school and summer initiative allowing students to independently study algebra and place out of Algebra~I in ninth grade \citep{cpsd_bridge_to_algebra}. It was even incorporated as a facet of the mayors program where students would be paid minimum wage to complete this online summer course. While well-intentioned, the program relied on voluntary participation, self-directed learning, and external support, limiting its reach. % Try to phase this in a way tht is more academic
+
+Journalistic accounts and public feedback suggest that participation was uneven and that families viewed the program as inadequate or inequitable \citep{boston_globe_bridge_feedback}. School Committee members explicitly cautioned against reforms that allow ``certain students to access opportunities while others do not'' \citep{boston_globe_bridge_feedback}. As a result, Bridge to Algebra functioned less as a broad equity intervention and more as a workaround for families already positioned to navigate the system.
+
+Consistent with research on opt-in enrichment programs, this case illustrates the limits of voluntary models in closing opportunity gaps. Reforms intended to expand access must be inclusive by default rather than dependent on individual initiative.
+
+\subsubsection{Leveling Up: Ninth-Grade Humanities Detracking}
+
+Beginning in 2017, CRLS implemented the ``Leveling Up'' initiative, placing all ninth-grade students into Honors English and heterogeneous World History classes, thereby eliminating lower-level tracks in these subjects \citep{crls_leveling_up}. This represented a substantial structural reform on the humanities side and was accompanied by additional instructional supports, including co-teaching in some sections. % NOTE TO SELF THIS WAS LIKELY IMPLEMENTED BY SUZIE VB LET JASPER AND ANORAG KNOW THIS
+
+Evidence suggests partial success. Reporting from the \textit{Register Forum} indicates that the reform increased racial diversity in ninth-grade honors classes and that a substantial majority of students subsequently expressed interest in taking additional honors coursework \citep{registerforum_leveling_up_impact}. However, disparities in later AP enrollment persisted, and teacher reports indicated continued de facto differentiation within classrooms through uneven support and instructional pacing \citep{registerforum_leveling_up_challenges}.
+
+Five years after implementation, observers noted that while access expanded, outcomes remained uneven and student perceptions of rigor and curriculum relevance were mixed \citep{registerforum_leveling_up_evaluation}. These findings align with broader research showing that detracking can improve equity only when sustained instructional support and curricular adaptation accompany structural change.
+
+
+\subsection{Evidence-Based Reform Strategies}
+
+Building on both the CRLS experience and prior research, this section outlines three complementary categories of reform.\\
+
+\subsubsection{Instructional Reforms}
+
+Instructional reforms focus on classroom practice and student support.
+
+\begin{itemize}
+\item \textbf{Co-requisite Academic Support.} Research from successful detracked districts, such as Rockville Centre, New York, shows that providing concurrent support classes alongside rigorous coursework substantially improves outcomes for historically underrepresented students \citep{burris2005detracking}. CRLS could adopt a similar model by offering math labs or writing support for students newly enrolled in honors or AP courses.
+
+\item \textbf{Teacher Professional Development.} Effective detracking requires teacher capacity to manage heterogeneous classrooms. Studies emphasize the role of high expectations, differentiated instruction, and culturally responsive pedagogy in improving student outcomes \citep{hattie2009visible,burris2014}. Targeted professional development can help reduce within-class tracking and implicit bias in recommendation and grading practices. Teachers within CRLS currently do not think very highly of the PD Days that they have allotted often citing the at "nothing gets done" [Personal Communication]
+
+%\item \textbf{Curriculum Relevance.} Student feedback suggests that curriculum relevance affects engagement, particularly in heterogeneous honors classes \citep{registerforum_curriculum_feedback}. Incorporating diverse texts and perspectives aligns with evidence that culturally relevant pedagogy improves achievement and belonging among students of color.
+
+\item \textbf{Reducing Stereotype Threat.} Classroom practices that affirm belonging--such as representation, explicit encouragement, and exposure to role models—are supported by social-psychological research and can reduce performance gaps in advanced settings.
+\end{itemize}
+
+\subsubsection{Structural Reforms}
+
+Structural reforms alter placement rules and default pathways.
+
+\begin{itemize}
+\item \textbf{Universal Algebra with Support.} As Cambridge moves to reintroduce eighth-grade Algebra~I for all students, ensuring adequate preparation and co-requisite support is essential. Evidence from Dallas Independent School District shows that automatic (opt-out) enrollment policies dramatically increased Black and Hispanic participation in advanced math without reducing achievement \citep{the74_dallas_optout}.
+
+\item \textbf{Review of Gatekeeping Criteria.} Eliminating subjective prerequisites such as teacher recommendations and replacing them with transparent, objective criteria can reduce racial disparities in advanced course access \citep{edtrust_gatekeeping}.
+
+\item \textbf{Diverse Staffing.} Research indicates that students of color are more likely to be recommended for advanced coursework by teachers who share their racial background \citep{edweek_teacher_diversity}. While long-term, diversifying instructional staff may support more equitable access. \textbf{No data for this but the staff is not nearly as diverse as the student body within CRLS.}
+\end{itemize}
+
+\subsubsection{Informational Reforms}
+
+Informational reforms address knowledge and encouragement gaps.
+
+\begin{itemize}
+\item \textbf{Proactive Counseling and Outreach.} Schools can reduce inequities by ensuring that all students and families receive clear, proactive guidance about advanced course options and pathways.
+
+\item \textbf{Peer Mentorship.} Pairing younger students with upperclassmen who have succeeded in advanced coursework—particularly mentors from underrepresented groups—can normalize participation and build confidence.
+
+\item \textbf{Transparent Pathways.} Publishing clear course-sequencing maps demystifies access to advanced courses and helps families plan earlier.
+
+\item \textbf{Norm-Shifting Messaging.} Consistent institutional messaging that advanced coursework is attainable with support can counter misconceptions that such courses are reserved for a select few.
+\end{itemize}
+
+Taken together, these recommendations emphasize that equitable access to advanced coursework is unlikely to result from a single policy change. Instead, sustained improvement requires aligning structural access, instructional support, and informational transparency.
+
+
+\section{Discussion}
+
+This study set out to examine whether racial disparities in mathematics course enrollment at Cambridge Rindge and Latin School (CRLS) differ from what would be expected based on overall school demographics, to assess the magnitude of any such differences, and to situate those patterns within both comparative subject areas and student-reported experience. Taken together, the administrative enrollment data and the student survey reveal a coherent but nontrivial picture of inequality---one characterized less by a simple exclusion from advanced coursework and more by institutional sorting across the full course hierarchy.
+
+\subsection{Interpreting the Bifurcated Enrollment Pattern}
+
+A central empirical finding of this analysis is that racial disproportionality in mathematics enrollment does not increase with course rigor. Instead, effect size estimates indicate a bifurcated structure: the largest deviations from proportional representation occur in standard-level mathematics, followed by Advanced Placement (AP) courses, with honors-level mathematics showing the smallest departure from expected distributions.
+
+This pattern complicates common narratives that locate inequity primarily at the top of the academic hierarchy. While AP mathematics does exhibit substantial underrepresentation of Black and Hispanic students, the most severe disproportionality appears at the lower end of the course structure, where Black and Hispanic students are overrepresented and White students are notably underrepresented relative to school demographics. The honors level, by contrast, functions as a partial equilibrium point---closer to demographic proportionality, yet still not fully neutral.
+
+This dual structure suggests that mathematics placement at CRLS operates through sorting mechanisms at both ends of the course hierarchy. Rather than a single gate blocking access to advanced coursework, the system appears to distribute students unevenly across levels in ways that simultaneously concentrate students of color in standard-level courses and concentrate White and Asian students in AP courses. This finding aligns with prior research emphasizing that tracking systems can reproduce inequality not only through elite exclusion, but also through differential assignment into ostensibly “default” pathways that carry long-term consequences.
+
+Additionally, with Honor classes acting as what is essentially a standard for many classes in the school, it is significant that in the Math system CRLS sorts historically underrepresented groups students away from these classes... \textbf{Note to self expand on this as a major difference in Math and other subjects}
+
+\subsection{Persistence, Magnitude, and Institutional Significance}
+
+The statistical analyses demonstrate that these disparities are not isolated to particular years or cohorts. Chi-square tests consistently reject the null hypothesis of proportional representation across multiple years, and the associated effect sizes indicate that the observed deviations are substantively meaningful rather than artifacts of large sample sizes. Importantly, the magnitude of these effects varies systematically by course level, reinforcing the interpretation that disparities are structured rather than random.
+
+From an institutional perspective, the persistence and structure of these patterns suggest that course enrollment functions as a durable indicator of opportunity allocation. Because mathematics is sequential and cumulative, differential placement at any point in the hierarchy can constrain later options. The observed overrepresentation of students of color in standard-level mathematics is therefore not merely descriptive; it signals potential downstream effects on access to advanced coursework, college readiness benchmarks, and postsecondary trajectories.
+
+\subsection{Comparative Subject Evidence and the Specificity of Mathematics}
+
+Comparative evidence from English and History, while limited by data suppression, provides important contextual grounding. Student survey responses indicate that mathematics is perceived as the least equitable department by a substantial margin, whereas no single department dominates perceptions of equitable placement. This asymmetry reinforces the interpretation that mathematics occupies a distinctive institutional role, consistent with its highly sequenced structure and its function as a gatekeeper subject.
+
+The contrast between mathematics and other subjects also suggests that disparities at CRLS are not solely the result of generalized inequity or student sorting across all domains. Instead, they appear concentrated in areas where early placement decisions, prerequisite structures, and definitions of “readiness” play a particularly strong role. This specificity strengthens the case for examining mathematics placement as a focal site of institutional inequality.
+
+\subsection{Student Perceptions, Ambivalence, and Structural Opacity}
+
+The student survey adds a layer that both corroborates and complicates the administrative findings. On one hand, a majority of respondents identify mathematics as the least equitable department and acknowledge the influence of race and socioeconomic status on course placement. On the other hand, responses to questions about fairness, discouragement, and institutional action are marked by substantial neutrality and ambivalence.
+
+This pattern of mixed responses suggests that inequity at CRLS is experienced less as an overt or universally recognized injustice and more as a diffuse, opaque process. Many students report feeling personally supported by individual teachers or counselors while simultaneously perceiving broader structural limitations in access to advanced coursework. The coexistence of personal encouragement and systemic sorting helps explain why disparities can persist even in a school climate that many students describe as supportive.
+
+Open-ended survey responses reinforce this interpretation. Students most frequently cite socioeconomic resources and course placement structures as barriers to equity, yet when asked to propose changes, they emphasize school-controlled interventions such as academic support, clearer advising, and more transparent pathways. This contrast suggests that students understand the role of external inequality while still hoping the school is a meaningful site for intervention.
+
+\subsection{Enrollment Patterns and Student Perceptions}
+
+The administrative enrollment data and student survey responses present a set of signals that are not immediately aligned. Quantitative analysis reveals persistent and substantively meaningful racial disparities in mathematics course enrollment, with disproportionate representation concentrated at both the standard and Advanced Placement levels. In contrast, student responses to closed-ended survey items show more ambivalence: while a plurality of respondents agree that course placement is fair, large neutral groups appear across multiple equity-related questions, and fewer than half of respondents explicitly endorse the view that race influences course placement at CRLS.
+
+This divergence does not indicate error in either data source; rather, it reflects differences in how institutional inequality is experienced and perceived. One explanation lies in positional visibility within the course hierarchy. Enrollment data show that honors and AP mathematics disproportionately enroll White and Asian students, while standard-level mathematics disproportionately enrolls Black and Hispanic students. Students situated in higher-level courses may encounter the placement system as functional or merit-based, whereas students concentrated in standard-level courses are more likely to experience limited access. Because individual students observe only a narrow slice of the system, aggregate disparities may not be readily apparent from personal experience alone.
+
+A second explanation concerns the distinction between interpersonal support and structural access. Survey responses indicate that a strong majority of students report having felt supported or uplifted by at least one teacher or counselor, even as a substantial minority report discouragement or underestimation when pursuing higher-level courses. This pattern suggests that supportive relationships can coexist with structural constraints on access. In such contexts, students may attribute outcomes to individual encouragement or effort rather than to institutional sorting processes, contributing to neutral or mixed responses on questions of equity.
+
+Finally, the open-ended survey responses provide insight into how perceptions shift when students are invited to reflect explicitly on barriers. When prompted, students most frequently identify course placement structures, prerequisite systems, and socioeconomic resources as obstacles to equity, and mathematics emerges as the department most strongly associated with inequitable access. The contrast between these responses and the neutrality observed in closed-ended items suggests that inequity at CRLS is often experienced as normalized rather than overt—embedded in standard procedures rather than explicit exclusion. This pattern aligns with prior research showing that contemporary educational inequality frequently operates through ostensibly race-neutral mechanisms that produce racially patterned outcomes without being widely recognized as inequitable.
+
+Taken together, these findings indicate that the absence of consensus in student perceptions should not be interpreted as evidence that disparities are minimal or contested. Instead, the combination of administrative outcomes, survey ambivalence, and open-ended critique points to a system in which structural sorting is durable but unevenly visible. This underscores the importance of pairing enrollment data with student-reported experience when evaluating equity, as each illuminates dimensions of inequality that the other alone cannot fully capture.
+
+\section{Conclusion}
+
+This study provides a comprehensive examination of racial disparities in mathematics course enrollment at Cambridge Rindge and Latin School, integrating administrative enrollment data with student-reported experiences to assess both the structure and perception of academic opportunity. The findings demonstrate that observed enrollment patterns differ significantly from what would be expected based on school demographics, with disparities that are persistent, substantively meaningful, and unevenly distributed across course levels.
+
+Rather than exhibiting a simple gradient in which inequity increases with course rigor, mathematics enrollment at CRLS is characterized by a bifurcated structure. Students of color are disproportionately concentrated in standard-level mathematics, while White and Asian students are disproportionately represented in AP courses, with honors-level mathematics occupying an intermediate position. This pattern suggests that inequity operates through institutional sorting across the full course hierarchy, not solely through exclusion from elite coursework.
+
+Student survey results provide critical context for interpreting these patterns. Students perceive mathematics as uniquely inequitable relative to other departments and identify course placement structures, socioeconomic resources, and access to support as central barriers. At the same time, many students report positive relationships with individual educators and express ambivalence rather than outright opposition when evaluating institutional fairness and reform efforts. These findings highlight the distinction between interpersonal support and structural access, and suggest that equity challenges at CRLS are embedded in organizational processes rather than individual intent.
+
+Several methodological decisions shape the interpretation of these results. Data suppression necessitated conservative analytical choices and limited fine-grained comparisons in some subject areas. Effect size measures were therefore emphasized alongside significance testing to assess substantive importance. The student survey was treated as exploratory rather than representative, and its value lies in illuminating patterns of perception rather than estimating population parameters. Together, these choices reflect a commitment to transparency and analytical restraint.
+
+In sum, this thesis documents clear and persistent racial disparities in mathematics course enrollment at CRLS and situates them within a broader institutional and experiential context. The evidence suggests that equity-oriented reform must address not only access to advanced coursework, but also the structural and informational processes that shape how students are distributed across the entire course hierarchy. Future research building on this work---particularly longitudinal analyses of cohort trajectories and deeper examination of middle school pathways---can further clarify how early placement decisions compound over time and how schools can intervene more effectively to expand opportunity.
+
+
+\appendix
+\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+
+\section{{Handling the suppression and the biases in this paper}}
+\subsection{Limitations in our understanding:}
+The data used in this paper was censored when it was received, with any value that was below a 5 represented as "suppressed" meaning that major inaccuracies were present in the ways that calculations of p-values had to be made. Any data that was censored was filled in as the number of missing students from the total student population/categories. For example, if it is known that 200 people are taking AP stats in a given year and the numbers of Hispanic and Native American people were suppressed. $${\frac{200-\sum{White+Black+Asian}}2 =\text{Hispanic}, \text{Native American}}$$ 
+This means that categories were equal in cases when there might have been an imbalance. This should not have affected the figures greatly as  classes from the analysis that were overly suppressed across the years (more than 2 categories were suppressed in any given class) were taken out. This did shorten the overall span of the analysis as RSTA classes had lower enrollment as a whole and were subsequently ignored. 
+
+\section{Statistical methods background}
+
+\subsection{Chi-Square Test}
+A chi-squared test was employed to determine if the observed proportions of students in math classes fit the expected distribution of students as given by the Department of Elementary and Secondary Education (DESE). 
+\textbf{Test Statistic:}
+To find the Chi-Squared test statistic of each, this formula was used 
+$\chi^2 = \sum \frac{(O - E)^2}{E}$, which is the sum of the difference between the number of observed students in each category and the expected number, squared, divided by the expected number of students in each category.
+
+\textbf{Degrees of Freedom:}
+The process for finding the degrees of freedom in a chi-square goodness of fit test, DF = number of groups - 1
+We have 7 groups and therefore a DF of 6 
+
+\textbf{The p-value:}
+
+\[
+P\left( \chi^2_{\text{df}} \geq \chi^2_{\text{obs}} \right)
+\]
+where \( \chi^2_{\text{df}} \) is the chi-squared distribution with the appropriate degrees of freedom, and \( \chi^2_{\text{obs}} \) is the observed test statistic.
+
+\subsection{Cohen's w}
+Cohen’s w is a standardized measure of effect size used to quantify the magnitude of the difference between an observed categorical distribution and an expected (theoretical) distribution under the null hypothesis.
+It is defined as follows:
+
+\[
+w = \sqrt{ \sum_{i=1}^{k} \frac{(p_{i,\text{obs}} - p_{i,\text{exp}})^2}{p_{i,\text{exp}}} }
+\]
+
+Where:
+\begin{itemize}
+  \item \( p_{i,\text{obs}} = \frac{O_i}{N} \) is the observed proportion in category \( i \)
+  \item \( p_{i,\text{exp}} = \frac{E_i}{N} \) is the expected proportion in category \( i \)
+  \item \( k \) is the number of categories
+\end{itemize}
+
+This formula compares the observed proportions to the expected proportions and weights the squared differences by the expected proportions, similar in spirit to the chi-squared statistic, but standardized to be independent of sample size. 
+
+\[
+\chi^2 = {N}{w^2}
+\]
+
+Thus, once you compute the chi-squared test statistic and know the sample size, you can derive Cohen's \({w}\):
+\[
+w = \sqrt{ \frac{\chi^2}{N} }
+\]
+
+This relationship is useful because while the chi-squared test tells you whether the difference is statistically significant. Cohen's \(w\) tells you how substantively large the difference is.  
+
+Interpretation of Cohen's \(w\) follow these rough benchmarks:
+
+\begin{align*}
+w &= 0.10 \quad \text{(small effect)} \\
+w &= 0.30 \quad \text{(medium effect)} \\
+w &= 0.50 \quad \text{(large effect)}
+\end{align*}
+
+Additionally, a total average of all the Cohen's \(w\) values was calculated to be used as a measure to compare school districts to Cambridge in further research.
+
+\subsection{Fisher's Combined P-Value}
+
+When you have multiple independent hypothesis tests (e.g. p-values from the same class across different years), Fisher's method provides a way to aggregate those p-values into a single test statistic that reflects the overall significance.
+
+\textbf{Fisher's Test Statistic:}
+given \(k\) independent p-values \(p_\text{1}, p_\text{2},\p_\text{3}, ... , p_\text{k},\) the test statistic is:
+
+\[
+\chi^2 = -2\sum_{i=1}^{k}\ln({p_i})
+\]
+
+Under the null hypothesis (i.e., assuming all \(p_i\)) values are from true nulls), \(\chi^2\) follows a chi-squared distribution with:
+
+\[
+df = 2k
+\]
+
+You can compute a combined p-value using the chi-squared survival function (upper tail area):
+
+\[
+p_{combined} = P(\chi^{2}_{2k}\geq \chi^2) 
+\]
+
+This combined p-value reflects the likelihood of observing a group of p-values at least this extreme under the global null hypothesis.\\
+
+A function was written to find Fisher's Test statistic [Appendix C.1]
+
+
+\section{Code}
+Python snippets, functions\\
+\subsection{Code for "Fisher\_\,method" combination of p-values:}
+\begin{minted}{python}
+    import numpy as np
+    from scipy.stats import chi2
+    
+    def fisher_method(p_values, label):
+        # Remove zeros and replace them with a small epsilon for stability
+        nonzero = p_values[p_values > 0]
+        if len(nonzero) == 0:
+            print(f"{label}: All p-values are zero, cannot compute.")
+            return
+    
+        eps = nonzero.min() / 10
+        p_safe = np.where(p_values == 0, eps, p_values)
+    
+        # Fisher's combined test statistic
+        X2 = -2 * np.sum(np.log(p_safe))
+        df = 2 * len(p_safe)
+        combined_p = chi2.sf(X2, df)
+    
+        print(f"{label}: Fisher’s X² = {X2:.3f}, df = {df}, combined p = {combined_p:.3e}")
+
+
+
+        
+    # Example use (with our data:
+    fisher_method(pAllYear, "All Years")
+    # All Years Fisher’s X² = 2294.770, df = 246, combined p = 0.000e+00
+    \end{minted}
+
+\section{Additional Figures}
+
+\subsection{DESE table}
+\begin{table}[ht]
+\centering
+\caption{Racial Demographics As Reported By DESE}
+\label{tab:race_demographics}
+\begin{tabular}{lccc}
+\hline
+\textbf{Race} & \textbf{\% of School} & \textbf{\% of District} & \textbf{\% of State} \\
+\hline
+American Indian or Alaska Native & 0.4 & 0.2 & 0.2 \\
+Asian & 13.0 & 15.0 & 7.5 \\
+Black or African American & 26.4 & 23.2 & 10.2 \\
+Hispanic or Latino & 14.1 & 14.5 & 25.9 \\
+Multi-Race, Not Hispanic or Latino & 10.1 & 11.6 & 4.6 \\
+Native Hawaiian or Other Pacific Islander & 0.0 & 0.0 & 0.1 \\
+White & 36.0 & 35.5 & 51.5 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Racial Breakdown of Responses}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.25\linewidth]{Race_bar_graph.png}
+    \caption{Bar Graph display of counts of the race of respondents}
+    \label{fig:placeholder}
+\end{figure}
+
+\section{Survey Questions}
+\begin{itemize}
+    \item What grade are you?	
+    \item How long have you been enrolled in Cambridge Public Schools?
+    \item How do you describe your racial/ethnic identity?
+    \item Choose the response that best describes your thoughts on the following statement: People are fairly placed into different course levels at CRLS (Honors, College Prep, AP).
+    \item Choose the response that best describes your thoughts on the following statement: I have wanted to take a higher-level course but felt discouraged or unable to.
+    \item Choose the response that best describes your thoughts on the following statement: Teachers encourage all students, regardless of background, to challenge themselves academically.
+    \item Which department do you think has the Most equitable course placement at CRLS?
+    \item Which department do you think has the Least equitable course placement at CRLS?
+    \item Respond with your opinion on the following statement: There are inequities are at CRLS.
+    \item Respond with your opinion on the following statement: Race/ethnicity influences which course levels students end up in at CRLS.
+    \item Respond with your opinion on the following statement: Socioeconomic status influences which course levels students end up in at CRLS.
+    \item Open Response: In your opinion, what is the biggest barrier to educational equity at Cambridge Public Schools? Guidance prompt: Examples might include tracking systems, access to early math acceleration, family resources, teacher expectations, implicit bias, district policies, communication gaps, etc. but please answer freely in your own words.
+    \item Where do you believe the primary causes of achievement gaps come from?
+    \item Which areas do you think are most effective for improving outcomes for students of color? (Select up to 3)
+    \item Respond with your opinion on the following statement: Schools alone can meaningfully reduce achievement gaps.
+    \item Respond with your opinion on the following statement: CRLS is currently making concrete steps to increase representation of students of color in advanced-level courses.
+    \item Rate CRLS' current initiative for representation of students of color in advanced-level courses.
+    \item Choose the response that best describes your thoughts on the following statement: I have felt that a teacher or counselor underestimated my academic potential for an AP course?
+    \item Choose the response that best describes your thoughts on the following statement: An AP level teacher has underestimated my ability to perform in their class.
+    \item Have you ever felt especially supported or uplifted by a teacher or counselor?
+    \item Choose the response that best describes your thoughts on the following statement: Opportunities at CRLS (clubs, advanced classes, leadership roles) are distributed equally among students.
+    \item Open Response: What is one change you think CRLS should make to improve equity, belonging, or student success?
+    \item Open Response: Is there anything else you would like to share about your experience or perspectives on equity at CRLS?
+
+\end{itemize}
+
+\section{Annotated Bibliography}
+
+\subsection{The Cambridge Rindge and Latin School: Yesterday and Today}
+The Cambridge Rindge and Latin School: Yesterday and Today traces the origins of Cambridge’s secondary education from the establishment of the Latin School in the 1600s through the 20th century. It details the separate identities of Cambridge High and Latin School, as well as the Rindge Technical School, showing how one emphasized academic college preparation and the other vocational preparation. The book highlights how these schools mirror the growth of Cambridge itself, documenting major expansions, curriculum shifts, and changes in student population over many decades. 
+
+A major focus of the book and something of relevance to this paper is the 1977 merger that led to the creation of today’s Cambridge Rindge and Latin School. Langone describes how the new school adopted a house system to manage its large enrollment, organizing students into various “sub-schools,” such as the Pilot, Fundamental, etc. These houses, along with the mix of academic and technical tracks, created separate and distinct educational pathways within one school. The narrative underscores CRLS’s ongoing efforts to balance tradition and change, presenting the institution as both a product of its long history and a reflection of Cambridge’s diversity at the close of the 20th century. 
+
+The Cambridge Rindge and Latin School: Yesterday and Today shows how CRLS' structure has continually shaped who studies where and how within the city. The book's description of the long-standing separation between Cambridge High and Latin and Rindge Tech, and later the internal divisions of the merged school, shows how lines of difference have persisted even within a single institution. The pieces that are most useful to this research were the mentions of the separation of different groups within the school. \textbf{cite:}https://registerforum.org/3877/news/diversity-in-cambridge-part-2/
+Langone also mentioned past issues within the school, as even after merging the schools, CRLS still had separate buildings and satellite programs all over Cambridge. Edward Sarasin, the school's first black headmaster, characterized the school as "East was East and West was West". Describing a school divided by building, culture, and affiliation, a physical and social geography that influenced how students experienced opportunity. Reports of "racial strife" and the presence of gangs during Sarisin's first years (70s and 80s) were common, revealing clear racial divisions among the students. These historical divisions provide essential background for understanding the present-day organization of students across advanced, standard, and technical courses. When comparing CRLS with other nearby districts, it is helpful to consider how such structural legacies, separate programs, differing academic traditions, and shifting boundaries between neighborhood and school identity continue to shape the distribution of students across academic pathways today.
+
+\subsection{Social capital, information, and socioeconomic disparities in
+math coursework}
+
+\textit{Crosnoe, R., \& Schneider, B. (2010). Social capital, information, and socioeconomic disparities in math coursework. American Journal of Education, 117(1), 79–107. https://doi.org/10.1086/656347}\\
+Using longitudinal NELS:88 data, Crosnoe and Schneider show that socioeconomic status (SES) predicts both initial math placement and persistence through high school, even after controlling for prior achievement. SES disparities are largest among students with low middle school math performance, where high-SES students are more likely to advance and accumulate additional math credits. Access to “coursework consultants” (teachers, counselors, parents) partially mitigates these gaps for low-SES students, suggesting that increasing advising and information supports at key decision points, such as the transition into high school, can promote more equitable math trajectories. This could be largely applicable in the case of CRLS, as [Neilsburg Research]https://www.neilsberg.com/insights/cambridge-ma-median-household-income-by-race shows there is a clear correlation bettween race and SES within Cambridge. This could imply that implementing a strategy as outlined by Crosnoe could mitigate the disparities amoung racial groups in CRLS.
+
+\subsection{Who gets in? Examining inequality in eighth-grade Algebra.}
+
+\textit{Morton, K., \& Riegle-Crumb, C. (2019). Who gets in? Examining inequality in eighth-grade Algebra. Journal for Research in Mathematics Education, 50(5), 529–554.}\\
+This study investigates placement into eighth-grade Algebra I within a large urban district, discovering that Black and Hispanic students are under-represented relative to White peers, even after controlling for prior academic performance and coursework. The findings emphasize how early “gatekeeping” processes act as critical filters that shape access to advanced high-school math, thereby contributing to persistent racial/ethnic inequities in mathematics trajectories. This study acts as a way to clarify the scope/lens of this paper as this thesis examines high school placement. Within Cambridge Eigth grade Algebra 1 has been largely eliminated since 2017 [6.1.1] but there have been cases of some middle schools providing pathways to skip Algebra 1 when entering high school. This means that the middle school system while out of the scope of this paper has a profound impact on future mathematics. 
+
+\subsection{The Advanced Placement program and educational inequality}
+
+\textit{Owen, S. (2025). The Advanced Placement program and educational inequality. Education Finance and Policy, 20(1), 1–32.}\\
+Using Michigan administrative data, Owen examines the effects of increasing Advanced Placement (AP) course availability. The study finds that new AP offerings disproportionately benefit non-economically disadvantaged, White or Asian, and higher-achieving students, effectively widening existing inequities. Importantly, simply increasing AP access does not broaden college outcome gains unless accompanied by targeted support and encouragement for underrepresented students. This study provides a clear check on the idea that just having an increase in the number of underrepresented students enrolled in AP/Hn classes is not the only metric of understanding we should be using to improve equity in CRLS and other school systems. 
+
+\subsection{The Black–White gap in mathematics course taking}
+
+\textit{Kelly, S. (2009). The Black–White gap in mathematics course taking. Sociology of Education, 82(1), 47–69.}\\
+Kelly employs NELS:88 data to document persistent within, school disadvantages for Black students in mathematics course-taking, relative to White peers, differences that remain after adjusting for prior achievement and SES. In integrated school contexts, internal placement and tracking processes are shown to perpetuate racial inequities in math access, even when external conditions appear equivalent. This study shows helps support the idea that any disparities seen in enrollment are not only caused by worse prior achievement but by structural issues and educational barriers that should be mitigated.
+
+
+\subsection{Accelerating Opportunity: The Effects of Instructionally Supported Detracking}
+This study evaluates the Algebra 1 initiative in a diverse Bay Area school district, where ninth-grade students identified as below grade level were randomly assigned either to the traditional remedial pre-Algebra track or to heterogeneous Algebra 1 classrooms with additional teacher supports. The reform bundled higher expectations with intensive professional development, extra planning time, and pedagogical coaching for teachers. The key innovation was combining detracking (placing underprepared students directly into Algebra I) with strategies to help teachers manage wide skill variation in their classrooms. This design allowed researchers to rigorously test whether placing lower-achieving students in a college-preparatory sequence could improve long-term outcomes without harming peers.
+The findings show that underprepared students assigned to the Algebra I Initiative significantly outperformed their peers in traditional remedial tracks. By 11th grade, they registered gains of roughly 0.2 standard deviations on state math assessments, equivalent to nearly a full year of additional learning. These students were also more likely to complete Geometry and Algebra II, accumulate more math credits overall, attend school more regularly, and remain enrolled in the district. Notably, there were no negative impacts on students already at grade level. While the policy was resource-intensive, its cost-effectiveness was favorable compared to typical per-pupil spending increases. The study highlights that ninth grade is a pivotal “make-or-break” year, demonstrating that with strong instructional support, detracking can enhance achievement, foster student engagement, and increase access to advanced coursework.
+
+Dee and Huffaker's experiment offers a valuable methodological model for examining how course placement policies intersect with student demographics. Their randomized design demonstrates that structural reforms alone are insufficient unless paired with teacher capacity-building. This insight can inform my interpretation of racial patterns in course enrollment at CRLS. Suppose Cambridge's distribution of students across honors, standard, and support-level math classes reflects both placement policy and classroom practice. In that case, the Algebra I Initiative highlights the need to view those outcomes through an instructional lens, rather than just an administrative one. The study's focus on a district where race and residential patterns strongly influenced initial placement decisions mirrors dynamics often visible in Cambridge and surrounding towns. Importantly, Dee and Huffaker demonstrate that reshaping student pathways is possible without harming higher-performing peers, provided the reform is supported by intensive teacher development and clearly defined pedagogical strategies. This finding will help frame my analysis of CRLS's own structures: identifying whether differences in course-level racial representation stem from placement processes, instructional supports, or the absence of coordinated efforts to manage heterogeneous classrooms.
+
+
+
+\subsection{TRACKING AND DETRACKING:
+HIGH ACHIEVERS IN MASSACHUSETTS MIDDLE SCHOOLS}
+Between 1991 and 2009, Massachusetts middle schools underwent a dramatic shift away from ability grouping in most subjects. At the start of the 1990s, eighth graders typically had at least two levels of English, history, and science, and three or more levels of math. By 2009, English, history, and science were taught primarily in single, mixed-ability classes, while math was typically offered in two levels: an algebra class and a general math class for students who were not yet ready. The percentage of schools that could be classified as “detracked” nearly doubled in this period (from about a quarter to almost half). What was once a landscape of multiple tiers gradually gave way to a structure where three-level systems were nearly extinct in every subject except math.
+The report also highlights where and why policies diverged. Urban and rural schools, especially those serving higher shares of low-income students, were most likely to abandon tracking, while suburban schools tended to retain it. School configuration also mattered: junior-high-style 7–8 schools leaned toward tracking, while 5–8 or 6–8 middle schools were more likely to combine levels. Decisions were shaped by local politics, with principals and district leaders being the most influential. However, when parents and school boards became involved, tracking usually remained in place. In terms of outcomes, the analysis revealed little difference in English, but in math, schools with more track levels consistently produced more students at the “Advanced” level on the state exam and fewer at the “Failing” level. Each additional math track was associated with about a three-point increase in the share of high achievers, even after adjusting for school demographics.
+
+Loveless's study is most useful for its framing of tracking as a structural variable that interacts with local demographics and community decision-making. The statewide data provide a model for interpreting variation among districts, showing that tracking patterns often align with neighborhood income, racial composition, and parental influence rather than pure academic necessity. This perspective suggests that differences in course-level racial distribution may be better understood as organizational artifacts shaped by community demographics and administrative philosophy. Loveless's attention to local governance, how principals and district leaders drive detracking while parent influence tends to preserve tracking, offers a framework for thinking about Cambridge's unique policy context, where public engagement and political activism influence school structure. Moreover, his finding that math remains the most resistant subject to detracking provides a practical cue for where disparities in representation are likely to appear. In designing my analysis, I can use Loveless's methodology and conclusions as a comparative backdrop to examine whether CRLS's current course offerings and racial distributions mirror the broader Massachusetts pattern he identified, or whether Cambridge's long history of structural reform has produced a distinct outcome.
+
+
+\subsection{It doesn't Add Up: African American Students' Mathematics Achievement.}
+
+Gloria Ladson-Billings's "It Doesn't Add Up" (1997) situates African American students' persistent underperformance in mathematics within both historical and contemporary inequities and reform discourse. Writing at a time when the nation was championing a shift from memorization to problem-solving and conceptual understanding, Ladson-Billings argues that these reforms largely bypassed the racial realities of U.S. schooling.  Despite optimism about standards-based reform, African American students continue to face systemic barriers rooted in tracking, low expectations, and teaching practices disconnected from their lived experience. She describes how mathematics has been positioned as a marker of innate intelligence and as an abstract culture-free domain, assumptions that obscure how race and culture shape access to learning. Algebra, in particular, is identified as a gatekeeper subject; entry to higher education and many professions depend on it, yet access remains unequally distributed. This article combines sociological critique with pedagogical theory, drawing on examples of successful teachers who reject deficit assumptions and cultivate high expectations through culturally relevant practices.
+
+In the context of comparing racial distributions across districts and advanced math classes, Ladson-Billings provides both conceptual grounding and methodological direction for her argument that opportunity gaps arise from cultural and structural sorting mechanisms rather than student deficits. This helps clarify why disparities and high-level math enrollment persist even in well-performing systems. The papers' historical framing, linking civil rights goals of literacy and citizenship to mathematics as a new gate to opportunity, invites the reader to interpret algebra access as a civil rights issue rather than merely an academic one. For my project, this means treating on-time Algebra 1 as a pivotal threshold and examining how teacher expectations, course offerings, and distinct rhetoric around Readiness reflect deeper beliefs about who belongs in advanced math. This article's call to document 'Successful' rather than 'Deficit' narratives also provides a path for complementing enrollment statistics with qualitative examples of effective detracking or inclusion. Less directly valuable for my quantitative analysis are the theoretical sections on complexity and situated cognition, but they enrich interpretation by emphasizing how classrooms act as adaptive systems where teachers' beliefs can either amplify or counter systemic inequities. 
+
+\subsection{Detracking: The Social Construction of ability, cultural politics, and resistance to reform. }
+In Detracking: The Social Construction of Ability, Cultural Politics, and Resistance to Reform, Jeannie Oakes and her colleagues analyze detracking as both an educational and ideological struggle. Based on a 3-year, multisite study of 10 racially and socioeconomically mixed secondary schools across the United States and the authors show the detracking reform challenges entrenched beliefs about intelligence merit and fairness they argue that opposition to detracking—often framed as a concern for high achievers— is rooted and socially constructed ideas of fixed ability and meritocracy that have long legitimized racial in class hierarchies in schools. Drawing on the sociology of knowledge, the authors argue that what schools regard as scientific truth about "intelligence" is, in fact, a cultural artifact shaped by political interests and community norms. This ties back to the last reading on tracking vs detracking in Massachusetts: "tracking acts as a variable interacting with local demographics and community decision-making." Educators who embrace detracking confront both technical hurdles and normative and political resistance: parents who equate tracking with equality, colleagues who fear diluted standards, and administrators wary of public backlash. This article's qualitative evidence—teacher interviews, community debates, and School Board Dynamics—captures the lived politics of reform, exposing how racialized understandings of "giftedness" persist even amid policy changes. 
+
+This study provides a theoretical and empirical foundation for analyzing how racial disparities in advanced math classes emerge from institutional decision-making rather than a student's ability. They're framing of ability as a socially constructed and politically defended category is directly applicable to my comparison of math achievement in Massachusetts districts.  I could utilize their insights to examine district-level documents and policies, such as course catalogs, placement rules, and appeal processes, for the use of language like "readiness," "fit," or "rigor," which often masks ideological boundaries. This also demonstrates that detracking outcomes depend heavily on local political culture: reforms thrive when school leaders frame mixed-ability learning as equity-enhancing rather than threatening to excellence in this context. The political lens encourages me to interpret quantitative disparities like racial gaps in calculus enrollment as visible traces of community debates about merit and fairness.  The article's limitations lie in its era and scope, as it predates newer accountability systems and employs a more qualitative analysis rather than a quantitative analysis. Still, it is the conceptual clarity about how culture affects structure that makes it invaluable for intervening in district variation today; together, Ladson-Billings and Oakes illuminate how both classroom practice and institutional ideology sustain racial stratification in mathematics, providing complementary lenses for understanding who advances and who is left behind.
+
+
+\end{document}
+
+
