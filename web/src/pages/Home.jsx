@@ -6,7 +6,7 @@ const Home = () => {
             <section className="text-center mb-8">
                 <h1 className="mb-4">Calder Russell</h1>
                 <h2 className="text-xl font-normal text-secondary">
-                    Analysis of Racial Distribution of Advanced Level Mathematics Classes in Cambridge Rindge and Latin School
+                    Analysis of Racial Distribution of Mathematics Classes in Cambridge Rindge and Latin School
                 </h2>
             </section>
 
