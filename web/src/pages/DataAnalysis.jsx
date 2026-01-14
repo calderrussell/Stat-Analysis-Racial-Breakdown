@@ -7,12 +7,8 @@ const DataAnalysis = () => {
                     <p>
                         [Insert your charts, graphs, and analysis here.]
                     </p>
-                    <h3>Key Findings</h3>
-                    <ul>
-                        <li>Finding 1...</li>
-                        <li>Finding 2...</li>
-                        <li>Finding 3...</li>
-                    </ul>
+                    <h3>Important Figures and Methods of Analysis</h3>
+
                 </div>
             </div>
         </div>
