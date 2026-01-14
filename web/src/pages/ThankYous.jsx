@@ -9,10 +9,10 @@ const ThankYous = () => {
                     </p>
                     <p>
                         I would like to specifically thank my advisor, Nathan Whitfield, for his invaluable guidance and support throughout this project. Helping me focus my vision on this project and providing readings and acting as a sounding board that kept me grounded and challenging myself not settling for work that was below my full potential.
-                        He 
+                        I appreciate his patience and willingness to answer my questions and provide feedback on my work. 
                     </p>
                     <p>
-                        I would also like to thank Ms. FitzGerald for all of the work and effort that she puts into this program while also handling TAs. I really appreciated this oppurtunity to explore research that is unique and truly self gudied seperate from a school assignment
+                        I would also like to thank Ms. FitzGerald for all of the work and effort that she puts into this program while also handling TAs. I really appreciated this opportunity to explore research that is unique and truly self guided separate from a school assignment.
                     </p>
                     <p>
                         I want to thank Mr. Roldan for helping me choose to do this topic as my proposed paper.
@@ -21,7 +21,7 @@ const ThankYous = () => {
                         Thanks to Maisha Moses for the help in thinking through my ideas and really allowing me to think through how I am writing this paper and what I need to consider while writing it. 
                     </p>
                     <p>
-                        Finally thanks to my parents who had read a lot of draft over Christmas break giving me advice on my writing and the overall structure of the paper. Looking at a lot of visualizations and giving candid feed back.
+                        Finally thanks to my parents who had read a lot of drafts over Christmas break giving me advice on my writing and the overall structure of the paper. Looking at a lot of visualizations and giving candid feedback.
                     </p>
                 </div>
             </div>

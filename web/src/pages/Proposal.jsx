@@ -14,7 +14,7 @@ const Proposal = () => {
                         I read relevant research papers and articles on the topic of racial disparities in education and how they relate to math classes. I also looked into the history of racial segregation in schools and how it has impacted the current state of education.
                     </p>
                     <p>
-                        Through the process of writing this paper I decided that I wanted it to be accesible by a wider audiance having both a highly anylitical tone with a bredth of informaiton and qualitative data included.
+                        Through the process of writing this paper I decided that I wanted it to be accessible by a wider audience having both a highly analytical tone with a breadth of information and qualitative data included.
                     </p>
                 </div>
             </div>
